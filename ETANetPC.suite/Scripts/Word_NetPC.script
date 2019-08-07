@@ -1,0 +1,14 @@
+﻿(*
+*Author - Phani Kumar Kasibhotla
+*Description - Script to run automated test cases for launching Word and save & Print on a Retail Net PC
+*)
+
+//to connect and search
+setup 
+
+//to launch Word Docuemnt on Retail Net PC
+openWordDocument 
+
+//to save the word document
+
+//to print the word document
