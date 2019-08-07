@@ -1,0 +1,95 @@
+﻿(*
+*Author - Phani Kumar Kasibhotla
+*Description - Creating a framework for all Net PC Test Cases in ECert
+*)
+
+to setup
+	--set global properties
+	set the keydowndelay to 0.002
+	set the mousemovespeed to 8
+	set the mousemovedelay to 0.02
+	set the mouseclickdelay to 0.2
+	
+	set global globalTimeout to 20 
+	set global outputLogWindow to (8,235,390,723) //(64,166,1703,1018) bigger window
+	set global middleWindow to (533,269,1417,808)
+	set global screenHeight to 1080
+	set global screenWidth to 1920
+	set global taskbarRectangle to (0,0,0,0)
+	set global centerWindow to (378,170,1072,624)
+	set global topHalfScreen to (the remoteScreenSize,the remotescreenSize) * ((0,0),(1,.5))
+	set global topRightHalfScreen to (the remoteScreenSize,the remotescreenSize) *((.5,0),(1.4,.5))
+	set global bottomHalfScreen to (the remoteScreenSize,the remotescreenSize) * ((0,.5),(1,1))
+	set global topLeftCorner to (the remoteScreenSize,the remotescreenSize) *((0,0),(.55,.40))
+	
+	--Sets up the coordinates for the taskbar searchrectangle; pulled from controller suite
+	put topleft of ImageRectangle(image:"sutStartMenu") plus (0,-10) into top 
+	put bottom of ImageRectangle(image:"sutStartMenu") plus 8 into bottom
+	put the remotescreensize's width into right 
+	set global taskbarRectangle to ((top),(right,bottom))
+	log global taskbarRectangle
+	--Initializes flags for CC and DD controller
+	set global ccControllerFlag to false
+	set global ddControllerFlag to false
+	
+	--Initializes a global variable that will be used to search for the response message
+	set global responseArgument to ""
+	
+end setup
+
+(*
+Description - This function is to launch IE on a Net PC
+Params: None
+*)
+
+to openInternetExplorer
+
+	click Image: "InternetExploerIcon", WaitFor: 25, SearchRectangle:global taskbarRectangle
+	WaitFor 30, Image:"InternetExplorer_Launch_Validation"
+	
+end openInternetExplorer
+
+(*
+Description - This function is to login to SharePoint using c90 user accont on Net PC
+Params: None
+*)
+
+to loginSharePoint
+
+	Typetext "s9878c90@safeway.com"
+	click Image: "UserPasswordOnIE", waitfor: 25, SearchRectangle: global centerWindow
+	Typetext "Trusted@018"
+	click Image: "UserSigninOnIE", WaitFor: 25
+	WaitFor 30, Image:"Office365_Validation_SharePoint"
+	
+end loginSharePoint
+
+(*
+Description - This function is to launch Office365 for c90 user accont on Net PC
+Params: None
+*)
+
+to launchOffice365
+
+	TypeText pagedown, WaitFor: 25
+	DoubleClick (Image:"Office365Outlook", WaitFor:25, SearchRectangle: global bottomHalfScreen)
+	click Image: "Office365Outlook_Validation", WaitFor: 25
+	
+end launchOffice365
+
+//to be done - Word Test Case
+
+to openWordDocument
+
+	click Image: "WordIcon", WaitFor: 25, SearchRectangle:global taskbarRectangle
+	WaitFor 30, Image:""
+	
+end openWordDocument
+
+
+
+
+
+
+
+

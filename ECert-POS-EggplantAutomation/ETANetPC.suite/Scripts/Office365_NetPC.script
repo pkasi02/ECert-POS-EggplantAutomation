@@ -1,0 +1,17 @@
+﻿(*
+*Author - Phani Kumar Kasibhotla
+*Description - Script to run automated test cases for login and launch Office365 via Retail Net PC
+*)
+
+//to connect and search
+setup 
+
+//to launch IE on Retail Net PC
+openInternetExplorer 
+
+//to login into SharePoint using c90 user account
+loginSharePoint 
+
+//to launch Office365 and validate
+launchOffice365 
+
